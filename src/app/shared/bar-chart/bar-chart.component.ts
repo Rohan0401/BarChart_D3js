@@ -19,6 +19,7 @@ export class BarChartComponent implements OnInit, OnChanges {
   private colors: any;
   private xAxis: any;
   private yAxis: any;
+  private onClick: any;
 
   constructor() { }
 
@@ -47,6 +48,10 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.chart = svg.append('g')
       .attr('class', 'bars')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+      
+    
+
+    // Make a on Click 
 
     // define X & Y domains
     const xDomain = this.data.map(d => d[0]);
@@ -68,6 +73,10 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('class', 'axis axis-y')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
       .call(d3.axisLeft(this.yScale));
+    
+  
+
+    
   }
 
   updateChart() {
@@ -77,6 +86,7 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.colors.domain([0, this.data.length]);
     this.xAxis.transition().call(d3.axisBottom(this.xScale));
     this.yAxis.transition().call(d3.axisLeft(this.yScale));
+  
 
     const update = this.chart.selectAll('.bar')
       .data(this.data);
@@ -91,6 +101,14 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('width', d => this.xScale.bandwidth())
       .attr('height', d => this.height - this.yScale(d[1]))
       .style('fill', (d, i) => this.colors(i));
+    var toggleColor = (function(){
+        var currentColor = "red";
+     
+         return function(){
+             currentColor = currentColor == "black" ? "yellow" : "black";
+             d3.select(this).style("fill", currentColor);
+         }
+     })();
 
     // add new bars
     update
@@ -102,9 +120,12 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('width', this.xScale.bandwidth())
       .attr('height', 0)
       .style('fill', (d, i) => this.colors(i))
-      .transition()
-      .delay((d, i) => i * 10)
+      .on("click", toggleColor )
+    //  .on("click", (d) => { console.log(d[0])})
+    //  .transition()
+    //  .delay((d, i) => i * 10)
       .attr('y', d => this.yScale(d[1]))
       .attr('height', d => this.height - this.yScale(d[1]));
+      
   }
 }
