@@ -1,16 +1,17 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
-
+import { BarChartDTO } from ; 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None // To include the global CSS 
 })
 export class BarChartComponent implements OnInit, OnChanges {
-  @ViewChild('chart') private chartContainer: ElementRef;
-  @Input() private data: Array<any>;
-  private margin: any = { top: 50, bottom: 50, left: 50, right: 50};
+  @ViewChild('chart') private chartContainer: ElementRef;  // To provide the first element with the ID 
+  @Input() private chartAttributes: BarChartDTO; // Provide the input data bindings with array of any object
+  private data: any;
+  private margin: any; // Provide properties for the chart 
   private chart: any;
   private width: number;
   private height: number;
@@ -23,14 +24,15 @@ export class BarChartComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {
-    this.createChart();
-    if (this.data) {
+  ngOnInit() { // Method for intialization 
+    this.createChart(); // Invoke create Chart 
+    if (this.chartAttributes.data) {
+      this.data = this.chartAttributes.data;
       this.updateChart();
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges() { // Change the trasition 
     if (this.chart) {
       this.updateChart();
     }
@@ -87,7 +89,7 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.xAxis.transition().call(d3.axisBottom(this.xScale));
     this.yAxis.transition().call(d3.axisLeft(this.yScale));
   
-
+    // this binds the data 
     const update = this.chart.selectAll('.bar')
       .data(this.data);
 

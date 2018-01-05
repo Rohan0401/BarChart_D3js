@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs/Observable';
+import {BarChartDTO} from './shared/bar-chart/bar-chart-DTO';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AppComponent implements OnInit {
   private chartData: Array<any>;
+  private chartDTO: BarChartDTO
   data ; 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
-        console.log(data)
-    });
-}
+  constructor() {} ; 
 
-public getJSON(): Observable<any> {
-  return this.http.get("./assets/data.json")
-}
+
+
+
   ngOnInit() {
     // give everything a chance to get loaded before starting the animation to reduce choppiness
     setTimeout(() => {
@@ -139,6 +137,12 @@ demo_data = [
         this.demo_data[i].Freq
       ]);
     }
+    this.chartDTO = new BarChartDTO({
+      data: this.chartData,
+      margin: 20,
+      width: 500,
+      height: 500
+    })
 
  /*  generateData_dep() {
     this.chartData = [];
