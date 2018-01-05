@@ -1,13 +1,12 @@
-import { Numeric } from "d3";
 
 
 // Create an interface for Data Transfer Object 
 export interface IBarChartDTO {
-  
-   data: Array<any>;  
+
+   data: Array<any>;
    width: number;
    height: number;
-   margin?: number; 
+   margin?: number;
 }
 
 // Create a Class for the DTO
@@ -20,6 +19,6 @@ export class BarChartDTO implements IBarChartDTO{
    constructor (dtoInterface: IBarChartDTO) {
      (dtoInterface.margin)
        ? this.margin = dtoInterface.margin
-       : this.margin = 20; 
+       : this.margin = 20;
    }
 }
