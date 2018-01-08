@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs/Observable';
-import {BarChartDTO} from './shared/bar-chart/bar-chart.dto';
+import {BarChartDTO , BarChartDTOoutput} from './shared/bar-chart/bar-chart.dto';
 
 @Component({
   selector: 'app-root',
@@ -11,145 +11,72 @@ import {BarChartDTO} from './shared/bar-chart/bar-chart.dto';
 export class AppComponent implements OnInit {
   private chartData: Array<any>;
   private chartDTO: BarChartDTO;
+  private eventDTO : BarChartDTOoutput;
   constructor() {
     
   } ; 
+  countChange(event) {  console.log("The height of the bar is "+ event);
+  }
 
+  // Input data for the bar Chart 
 
-
+  demo_data = [
+    {
+      "Letter": "A",
+      "Freq": 20	
+    },
+    {
+      "Letter" : "B",
+      "Freq": 12
+    },
+    {
+      "Letter" : "C",
+      "Freq": 47
+    },
+    {
+      "Letter" : "D",
+      "Freq": 34
+    },
+    {
+      "Letter" : "E",
+      "Freq": 5
+    },
+    {
+      "Letter" : "F",
+      "Freq": 8 
+    },
+    {
+      "Letter" : "G",
+      "Freq": 25
+    }
+  
+    ]
+  
 
   ngOnInit() {
-    this.chartDTO = this.chartDTO || new BarChartDTO();
-    this.chartDTO.data = this.demo_data;
+    // this.chartDTO = this.chartDTO || new BarChartDTO();
+    this.generateData()
+    this.chartDTO = new BarChartDTO( this.chartData , {left : 40 , right : 20 , top : 20 , bottom : 30 } )
     
-    this.generateData(); 
+    
+    
+  
    
   }
-demo_data = [
-  {
-    "Letter": "A",
-    "Freq": 20	
-  },
-  {
-    "Letter" : "B",
-    "Freq": 12
-  },
-  {
-    "Letter" : "C",
-    "Freq": 47
-  },
-  {
-    "Letter" : "D",
-    "Freq": 34
-  },
-  {
-    "Letter" : "E",
-    "Freq" : 54
-  },
-  {
-    "Letter" : "F",
-    "Freq" : 21
-  },
-  {
-    "Letter" : "G",
-    "Freq" : 57
-  },
-  {
-    "Letter" : "H",
-    "Freq" : 31
-  },
-  {
-    "Letter" : "I",
-    "Freq" : 17
-  },
-  {
-    "Letter" : "J",
-    "Freq" : 5
-  },
-  {
-    "Letter" : "K",
-    "Freq" : 23
-  },
-  {
-    "Letter" : "L",
-    "Freq" : 39
-  },
-  {
-    "Letter" : "M",
-    "Freq" : 29
-  },
-  {
-    "Letter" : "N",
-    "Freq" : 33
-  },
-  {
-    "Letter" : "O",
-    "Freq" : 18
-  },
-  {
-    "Letter" : "P",
-    "Freq" : 35
-  },
-  {
-    "Letter" : "Q",
-    "Freq" : 11
-  },
-  {
-    "Letter" : "R",
-    "Freq" : 45
-  },
-  {
-    "Letter" : "S",
-    "Freq" : 43
-  },
-  {
-    "Letter" : "T",
-    "Freq" : 28
-  },
-  {
-    "Letter" : "U",
-    "Freq" : 26
-  },
-  {
-    "Letter" : "V",
-    "Freq" : 30
-  },
-  {
-    "Letter" : "X",
-    "Freq" : 5
-  },
-  {
-    "Letter" : "Y",
-    "Freq" : 4
-  },
-  {
-    "Letter" : "Z",
-    "Freq" : 2
+
+
+
+  
+// TODO remove this
+generateData() {
+  this.chartData = [];
+  for (let i = 0; i < (this.demo_data.length); i++) {
+    this.chartData.push([
+      `Letter ${this.demo_data[i].Letter}`,
+      this.demo_data[i].Freq
+    ]);
   }
-  ]
+}
 
-  generateData() {
-    this.chartData = [];
-    for (let i = 0; i < (this.demo_data.length); i++) {
-      this.chartData.push([
-        `Letter ${this.demo_data[i].Letter}`,
-        this.demo_data[i].Freq
-      ]);
-    }
-    this.chartDTO = new BarChartDTO({
-      data: this.chartData,
-      width: 500,
-      height: 500
-    })
-   
 
- /*  generateData_dep() {
-    this.chartData = [];
-    for (let i = 0; i < (10 + Math.floor(Math.random() * 100)); i++) {
-      this.chartData.push([
-        `Index ${i}`,
-        Math.floor(Math.random() * 100)
-      ]);
-    } */
-  } 
 }

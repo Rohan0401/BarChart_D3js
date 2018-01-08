@@ -15,3 +15,8 @@
     fill: rgb(192, 78, 25);
   }
 
+  .legend {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 60%;
+}
+

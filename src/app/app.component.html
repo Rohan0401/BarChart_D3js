@@ -1,2 +1,2 @@
 <h3>Bar Chart in D3js</h3>		
-<app-bar-chart *ngIf="chartDTO" [chartAttributes]="chartDTO"></app-bar-chart>
+<app-bar-chart  [chartAttributes]="chartDTO" (outputAttribute) = "countChange($event)"></app-bar-chart>
