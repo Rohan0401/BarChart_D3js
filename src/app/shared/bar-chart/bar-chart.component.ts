@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input,Output, ViewEncapsulation, EventEmitter} from '@angular/core';
 import * as d3 from 'd3';
-import { BarChartDTO, BarChartDTOoutput } from './bar-chart.dto'
+import { BarChartDTO } from './bar-chart.dto'
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 
 @Component({
@@ -24,8 +24,6 @@ export class BarChartComponent implements OnInit {
   private xAxis:  any;
   private yAxis:  any;
   private legend: any;
-  private xLabel: any;
-  private yLabel: any;
   private xLabelText: any;
   private yLabelText: any;
  
@@ -102,12 +100,6 @@ export class BarChartComponent implements OnInit {
 
     // Adding Labels to X and Y axis
 
-    // this.xLabel =  svg.append("g")
-    // .attr("transform", "translate(0," + this.height + ")")
-    // .call(d3.axisBottom(this.xAxis));
-    
-    // this.yLabel = svg.append("g")
-    // .call(d3.axisLeft(this.yAxis));
 
     this.xLabelText = svg.append("text")             
     .attr("transform",
@@ -116,7 +108,7 @@ export class BarChartComponent implements OnInit {
     .style("text-anchor", "middle")
     .style("font-family" ,  "Helvetica Neue, Helvetica, Arial, sans-serif")
     .style("font-size" ,  "80%" )
-    .text("Letters");
+    .text(this.chartAttributes.xLabel);
 
     this.yLabelText = svg.append("text")
     .attr("transform", "rotate(-90)")
@@ -126,7 +118,7 @@ export class BarChartComponent implements OnInit {
     .style("text-anchor", "middle")
     .style("font-family" ,  "Helvetica Neue, Helvetica, Arial, sans-serif")
     .style("font-size" ,  "80%" )
-    .text("Frequency");
+    .text(this.chartAttributes.yLabel);
 
     
   

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
 import { Observable } from 'rxjs/Observable';
-import {BarChartDTO , BarChartDTOoutput} from './shared/bar-chart/bar-chart.dto';
+import {BarChartDTO } from './shared/bar-chart/bar-chart.dto';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,14 @@ import {BarChartDTO , BarChartDTOoutput} from './shared/bar-chart/bar-chart.dto'
 export class AppComponent implements OnInit {
   private chartData: Array<any>;
   private chartDTO: BarChartDTO;
-  private eventDTO : BarChartDTOoutput;
+  
   constructor() {
     
   } ; 
-  countChange(event) {  console.log("The height of the bar is "+ event);
+  
+  countChange(event) {  
+    console.log("The height of the bar is "+ event);
+  
   }
 
   // Input data for the bar Chart 
@@ -44,10 +47,28 @@ export class AppComponent implements OnInit {
     {
       "Letter" : "F",
       "Freq": 8 
+    }, {
+      "Letter" : "G",
+      "Freq": 34
     },
     {
-      "Letter" : "G",
-      "Freq": 25
+      "Letter" : "H",
+      "Freq": 5
+    },
+    {
+      "Letter" : "I",
+      "Freq": 8 
+    }, {
+      "Letter" : "J",
+      "Freq": 34
+    },
+    {
+      "Letter" : "K",
+      "Freq": 5
+    },
+    {
+      "Letter" : "L",
+      "Freq": 8 
     }
   
     ]
@@ -56,7 +77,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // this.chartDTO = this.chartDTO || new BarChartDTO();
     this.generateData()
-    this.chartDTO = new BarChartDTO( this.chartData , {left : 40 , right : 20 , top : 20 , bottom : 30 } )
+    this.chartDTO = new BarChartDTO( this.chartData ,"Letters", "Frequency" , {left : 40 , right : 20 , top : 20 , bottom : 30 } )
     
     
     
