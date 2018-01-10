@@ -59,15 +59,15 @@ export class AppComponent implements OnInit {
       "Letter" : "I",
       "Freq": 8 
     }, {
-      "Letter" : "J",
+      "Letter" : "C",
       "Freq": 34
     },
     {
-      "Letter" : "K",
+      "Letter" : "B",
       "Freq": 5
     },
     {
-      "Letter" : "L",
+      "Letter" : "A",
       "Freq": 8 
     }
   
@@ -76,8 +76,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.chartDTO = this.chartDTO || new BarChartDTO();
-    this.generateData()
-    this.chartDTO = new BarChartDTO( this.chartData ,"Letters", "Frequency" , {left : 40 , right : 20 , top : 20 , bottom : 30 } )
+    
+
+    this.chartDTO = new BarChartDTO( this.demo_data ,"Letters", "Frequency" , {left : 10 , right : 10 , top : 20 , bottom : 30 } )
     
     
     
@@ -89,15 +90,8 @@ export class AppComponent implements OnInit {
 
   
 // TODO remove this
-generateData() {
-  this.chartData = [];
-  for (let i = 0; i < (this.demo_data.length); i++) {
-    this.chartData.push([
-      `Letter ${this.demo_data[i].Letter}`,
-      this.demo_data[i].Freq
-    ]);
-  }
-}
+
+
 
 
 }
